@@ -1,3 +1,22 @@
+# NewsPulse
+
+This is a React-based news website that provides users with the latest news articles from various sources. Users can browse different categories, and read articles of interest.
+
+## Features
+
+- Browse news articles by category (e.g., Technology, Business, Sports).
+- Have React tour to give tour of the wbesite.
+- Read full articles with detailed information.
+
+## Technologies Used
+
+- React
+- JavaScript
+- HTML/CSS
+- React Router for client side routing
+- React Tour to give a tour of the website
+- React top bar loading animation while fetching data from APIs
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

@@ -29,7 +29,7 @@ const News = (props) => {
 
   useEffect(() => {
     updateNews();
-    document.title = `${capitalizeFirstLetter(props.category)} - NewsMonkey`;
+    document.title = `${capitalizeFirstLetter(props.category)} - NewsPulse`;
   }, []);
 
   const fetchMoreData = async () => {
@@ -57,7 +57,7 @@ const News = (props) => {
         className="Ninth-step text-center "
         style={{ margin: "30px,0px", marginTop: "90px" }}
       >
-        NewsMonkey-Top {capitalizeFirstLetter(props.category)} Headlines
+        NewsPulse-Top {capitalizeFirstLetter(props.category)} Headlines
       </h2>
       <InfiniteScroll
         dataLength={articles.length}
