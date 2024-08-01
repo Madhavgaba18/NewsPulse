@@ -14,8 +14,14 @@ const News = (props) => {
     return string.charAt(0).toUpperCase() + string.slice(1);
   };
 
+  // api token - thenewsapi = oUvOhhKDJn647xo2uYt92VCHwVM6SNBNdrfwfgB4
+  // api token - currentapiServices = O27aYJqfDEvB4IRXSF5DgMzIf4sRBZNF-xXk_2AHu_89g2bN
+  // api token - Gnews =
+
   const updateNews = () => {
-    const url = `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=4a2f601bf8664832aff68a252bb9fbb1&page=${page}&pageSize=${props.pageSize}`;
+    // const url = `https://api.currentsapi.services/v1/latest-news?language=en&apiKey=O27aYJqfDEvB4IRXSF5DgMzIf4sRBZNF-xXk_2AHu_89g2bN`;
+    // const url = `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=4a2f601bf8664832aff68a252bb9fbb1&page=${page}&pageSize=${props.pageSize}`;
+    const url = `https://gnews.io/api/v4/search?q=example&lang=en&country=us&max=10&apikey=e50af7b33112fb62af1751b6d50fb733`;
     setLoading(true);
     fetch(url)
       .then(async (response) => {
@@ -33,22 +39,20 @@ const News = (props) => {
   }, []);
 
   const fetchMoreData = async () => {
-    console.log("hi");
-    const url = `https://newsapi.org/v2/top-headlines?country=${
-      props.country
-    }&category=${props.category}&apiKey=4a2f601bf8664832aff68a252bb9fbb1&page=${
-      page + 1
-    }&pageSize=${props.pageSize}`;
-    setPage(page + 1);
-    fetch(url)
-      .then(async (response) => {
-        let parsedData = await response.json();
-        console.log(parsedData);
-        setArticles(articles.concat(parsedData.articles));
-        setTotalResults(parsedData.totalResults);
-        setLoading(false);
-      })
-      .catch(console.error("Error in fetching data for infinite scroll"));
+    // const url = `https://newsapi.org/v2/top-headlines?country=${
+    //   props.country
+    // }&category=${props.category}&apiKey=4a2f601bf8664832aff68a252bb9fbb1&page=${
+    //   page + 1
+    // }&pageSize=${props.pageSize}`;
+    // setPage(page + 1);
+    // fetch(url)
+    //   .then(async (response) => {
+    //     let parsedData = await response.json();
+    //     setArticles(articles.concat(parsedData.articles));
+    //     setTotalResults(parsedData.totalResults);
+    //     setLoading(false);
+    //   })
+    //   .catch(console.error("Error in fetching data for infinite scroll"));
   };
 
   return (
