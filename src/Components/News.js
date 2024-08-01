@@ -14,14 +14,9 @@ const News = (props) => {
     return string.charAt(0).toUpperCase() + string.slice(1);
   };
 
-  // api token - thenewsapi = oUvOhhKDJn647xo2uYt92VCHwVM6SNBNdrfwfgB4
-  // api token - currentapiServices = O27aYJqfDEvB4IRXSF5DgMzIf4sRBZNF-xXk_2AHu_89g2bN
-  // api token - Gnews =
-
   const updateNews = () => {
-    // const url = `https://api.currentsapi.services/v1/latest-news?language=en&apiKey=O27aYJqfDEvB4IRXSF5DgMzIf4sRBZNF-xXk_2AHu_89g2bN`;
     // const url = `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=4a2f601bf8664832aff68a252bb9fbb1&page=${page}&pageSize=${props.pageSize}`;
-    const url = `https://gnews.io/api/v4/search?q=example&lang=en&country=us&max=10&apikey=e50af7b33112fb62af1751b6d50fb733`;
+    const url = `https://gnews.io/api/v4/top-headlines?category=general&lang=en&country=${props.country}&category=${props.category}&max=10&apikey=e50af7b33112fb62af1751b6d50fb733`;
     setLoading(true);
     fetch(url)
       .then(async (response) => {
@@ -39,20 +34,16 @@ const News = (props) => {
   }, []);
 
   const fetchMoreData = async () => {
-    // const url = `https://newsapi.org/v2/top-headlines?country=${
-    //   props.country
-    // }&category=${props.category}&apiKey=4a2f601bf8664832aff68a252bb9fbb1&page=${
-    //   page + 1
-    // }&pageSize=${props.pageSize}`;
-    // setPage(page + 1);
-    // fetch(url)
-    //   .then(async (response) => {
-    //     let parsedData = await response.json();
-    //     setArticles(articles.concat(parsedData.articles));
-    //     setTotalResults(parsedData.totalResults);
-    //     setLoading(false);
-    //   })
-    //   .catch(console.error("Error in fetching data for infinite scroll"));
+    const url = `https://gnews.io/api/v4/top-headlines?category=general&lang=en&country=${props.country}&category=${props.category}&max=10&apikey=e50af7b33112fb62af1751b6d50fb733`;
+    setPage(page + 1);
+    fetch(url)
+      .then(async (response) => {
+        let parsedData = await response.json();
+        setArticles(articles.concat(parsedData.articles));
+        setTotalResults(parsedData.totalResults);
+        setLoading(false);
+      })
+      .catch(console.error("Error in fetching data for infinite scroll"));
   };
 
   return (
@@ -71,9 +62,10 @@ const News = (props) => {
       >
         <div className="container">
           <div className="row">
-            {articles.map((element) => {
+            {articles?.map((element) => {
               if (!element) {
-                return console.error("No article found!");
+                console.error("No article found!");
+                return null;
               }
               return (
                 <div className="col-md-4" key={element.url}>
@@ -84,7 +76,7 @@ const News = (props) => {
                         ? element.description.slice(0, 88)
                         : ""
                     }
-                    imageUrl={element.urlToImage}
+                    imageUrl={element.image}
                     newsUrl={element.url}
                     author={element.author}
                     date={element.publishedAt}
@@ -93,6 +85,19 @@ const News = (props) => {
                 </div>
               );
             })}
+            {/* ) : (
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  fontSize: "60px",
+                  paddingTop: "100px",
+                }}
+              >
+                No more News for Today come back after 24hrs
+              </div> */}
+            {/* )} */}
           </div>
         </div>
       </InfiniteScroll>
