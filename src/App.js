@@ -5,6 +5,9 @@ import NavBar from "./Components/NavBar";
 import News from "./Components/News";
 import { steps } from "./Components/Steps";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Signin from "./pages/Signin";
+import Signup from "./pages/Signup";
+import Prefrence from "./pages/Prefrence";
 
 const App = () => {
   const pageSize = 38;
@@ -14,6 +17,9 @@ const App = () => {
         <TourProvider steps={steps}>
           <NavBar />
           <Routes>
+            <Route path="/signin" element={<Signin />} />
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/Prefrence" element={<Prefrence />} />
             <Route
               path="/"
               element={
