@@ -1,70 +1,90 @@
 import { useTour } from "@reactour/tour";
-import React from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
 const NavBar = () => {
   const { setIsOpen } = useTour();
+  const [open, setOpen] = useState(false);
+
+  const navLinks = [
+    { name: "Home", to: "/" },
+    { name: "Business", to: "/business" },
+    { name: "Entertainment", to: "/entertainment" },
+    { name: "Health", to: "/health" },
+    { name: "Science", to: "/science" },
+    { name: "Sports", to: "/sports" },
+    { name: "Technology", to: "/technology" },
+  ];
+
   return (
-    <div>
-      <nav className="navbar fixed-top navbar-expand-lg navbar-dark bg-dark ">
-        <div className="container-fluid First-step">
-          <Link className="navbar-brand " to="/">
+    <nav className="bg-gray-900 text-white fixed-top w-full z-50 shadow-md">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-16">
+          <Link to="/" className="text-xl font-bold text-white">
             NewsPulse
           </Link>
-          <button
-            className="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span className="navbar-toggler-icon"></span>
-          </button>
-          <div className="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul className="navbar-nav items-center me-auto mb-2 mb-lg-0">
-              <li className="nav-item Second-step">
-                <Link className="nav-link" aria-current="page" to="/">
-                  Home
-                </Link>
-              </li>
-              <li className="nav-item Third-step">
-                <Link className="nav-link" to="/business">
-                  Business
-                </Link>
-              </li>
-              <li className="nav-item items-center Fourth-step">
-                <Link className="nav-link" to="/entertainment">
-                  Entertainment
-                </Link>
-              </li>
-              <li className="Fifth-step nav-item">
-                <Link className="nav-link" to="/health">
-                  Health
-                </Link>
-              </li>
-              <li className="Sixth-step nav-item ">
-                <Link className="nav-link" to="/science">
-                  Science
-                </Link>
-              </li>
-              <li className="nav-item Seventh-step">
-                <Link className="nav-link" to="/sports">
-                  Sports
-                </Link>
-              </li>
-              <li className="nav-item Eighth-step">
-                <Link className="nav-link" to="/technology">
-                  Technology
-                </Link>
-              </li>
-              <button onClick={() => setIsOpen(true)}>Open Tour</button>
-            </ul>
+
+          {/* Hamburger menu */}
+          <div className="lg:hidden">
+            <button
+              onClick={() => setOpen(!open)}
+              className="focus:outline-none"
+            >
+              <div className="space-y-1">
+                <span className="block w-6 h-0.5 bg-white"></span>
+                <span className="block w-6 h-0.5 bg-white"></span>
+                <span className="block w-6 h-0.5 bg-white"></span>
+              </div>
+            </button>
           </div>
+
+          {/* Desktop nav */}
+          <ul className="hidden lg:flex space-x-6 items-center">
+            {navLinks.map((link) => (
+              <li key={link.name}>
+                <Link
+                  to={link.to}
+                  className="hover:text-indigo-400 transition duration-300"
+                >
+                  {link.name}
+                </Link>
+              </li>
+            ))}
+          </ul>
+          <button
+            onClick={() => setIsOpen(true)}
+            className="hidden lg:flex ml-4 bg-red-500 hover:bg-white hover:text-red-500 px-3 py-1 rounded text-sm"
+          >
+            Start Tour
+          </button>
         </div>
-      </nav>
-    </div>
+      </div>
+
+      {/* Mobile menu */}
+      {open && (
+        <div className="lg:hidden px-4 pb-4 bg-gray-800">
+          <ul className="flex flex-col space-y-3">
+            {navLinks.map((link) => (
+              <li key={link.name}>
+                <Link
+                  to={link.to}
+                  className="block py-2 hover:text-indigo-400"
+                  onClick={() => setOpen(false)}
+                >
+                  {link.name}
+                </Link>
+              </li>
+            ))}
+            <button
+              onClick={() => setIsOpen(true)}
+              className="bg-red-500 hover:bg-white hover:text-red-500 px-3 py-1 rounded text-sm"
+            >
+              Open Tour
+            </button>
+          </ul>
+        </div>
+      )}
+    </nav>
   );
 };
 

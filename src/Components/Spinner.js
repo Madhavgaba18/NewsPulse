@@ -1,13 +1,12 @@
-import React from 'react'
-import loading from "./Loading.gif.gif"
+import React from "react";
+import loading from "./Loading.gif.gif";
 
-const Spinner=()=>{
+const Spinner = () => {
+  return (
+    <div className="flex justify-center">
+      <img className="my-3" src={loading} alt={loading}></img>
+    </div>
+  );
+};
 
-    return (
-      <div className='text-center'>
-        <img className='my-3' src={loading} alt={loading}></img>
-      </div>
-    )
-}
-
-export default Spinner
+export default Spinner;
