@@ -20,7 +20,7 @@ const NavBar = () => {
     <nav className="bg-gray-900 text-white fixed-top w-full z-50 shadow-md">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          <Link to="/" className="text-xl font-bold text-white">
+          <Link to="/" className="text-xl First-step font-bold text-white">
             NewsPulse
           </Link>
 
@@ -44,7 +44,7 @@ const NavBar = () => {
               <li key={link.name}>
                 <Link
                   to={link.to}
-                  className="hover:text-indigo-400 transition duration-300"
+                  className="hover:text-indigo-400 second-step transition duration-300"
                 >
                   {link.name}
                 </Link>
